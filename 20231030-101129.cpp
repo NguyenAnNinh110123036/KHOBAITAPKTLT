@@ -4,7 +4,7 @@
 #include <alloc.h>
 main()
 {
-int x[101],y[101]:
+int x[101],y[101];
 int mh=0,mode=0,i,n;
 char *p[101];
 initgraph(&mh,&mode, "");
@@ -19,24 +19,15 @@ random(getmaxy()),random(getmaxcolor()));
 for(i=1;i<=100; ++i)
 {
 x[i]=random(getmaxx())-10;
-
 y[i]=random(getmaxy())-10;
-
 if(x[i]<0) x[i]=0;
-
 if(y[i]<0) y[i]=0;
-
 n-imagesize(x[i],y[i],x[i]+10,y[i]+10);
-
-253
-
 pli)-(char*)malloc(n);
-
 getimage(x[i].y[i],x[i]+10,y[i]+10,p[i]);
 }
 do 
 {
-
 for(i=1;i<=100; ++i)
 {
 setfillstyle(SOLID_FILLi+1);
