@@ -44,31 +44,33 @@ int tongM(int m)
 			return tt;
 }
 //Yeu cau 4: Nhap xuat mang 1 chieu
-int nhapmang(int a[], int &n, int &i)
+void nhapmang(int a[], int n)
 {
-	for(int i=0; i<n; i++)
-	if( i < n)
+	
+	if( n == 0)
 	{
-		printf("\t a[%d]= ", i);
-		scanf("%d", &a[i]);
-		return  nhapmang(a, n, i);
+		return ;
 	}
-	else
+	else 
 	{
-		return 0;
+		nhapmang(a, n-1);
+		printf("\n Nhap phan tu thu a[%d]= ", n-1);
+		scanf("%d", &a[n-1]);
+
 	}
 		
 }
-int xuatmang(int a[], int n, int i)
+void xuatmang(int a[], int n)
 {
-	if( i == n)
+	if( n == 0)
 	{
-		return 0;
+		return ;
 	}
 	else
 	{
-	printf("%5d", a[i]);
-	return xuatmang(a, n, i);
+		xuatmang(a, n-1);
+		printf("%4d", a[n-1]);
+	
 	}
 
 }
@@ -91,11 +93,11 @@ int main()
 	scanf("%d", &m);
 	tinhtongM  = tongM(m);
 	printf("\nTong cac so tu 1 toi %d la: %d", m, tinhtongM);
-	//
+	//Yeu cau 4
 	printf("\nNhap so luong phan tu cua mang: ");
-	scanf("%d", &i);
-	printf("Mang vua nhap:", nhapmang(a, n, i));
-	printf("\nMang sau khi nhap la:%d \n", xuatmang(a, n, i));
+	scanf("%d", &n);
+	nhapmang(a, n);
+	xuatmang(a, n);
 	return 0;
 	
 }
