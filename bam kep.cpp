@@ -3,12 +3,10 @@
 #include "stdlib.h"
 #include "conio.h"
 #include "time.h"
-
 #define TRUE 1
 #define FALSE 0
 #define NULLKEY -1
 #define M 10
-
 //Khai bao cau truc mot nut cua bang bam
 struct node
 {
@@ -18,10 +16,17 @@ struct node
 //Khai bao bang bam co M nut
 struct node hashtable[M];
 int N;	//bien toan cuc chi so nut hien co tren bang bam
+
 //ham bam
 int hashfunc(int key)
 {
 	return(key % M);
+}
+
+//ham bam thu hai
+int hashfunc2(int key)
+{
+	return (M-(key%M));
 }
 //Khoi dong bang bam
 void initialize()
@@ -31,6 +36,7 @@ void initialize()
 		hashtable[i].key = NULLKEY;
 	N=0;	// so nut hien co khoi dong bang 0
 }
+
 //Tac vu empty : kiem tra ca bang bam co rong hay khong
 int empty()
 {
@@ -45,20 +51,19 @@ int full()
 //Tac vu search : tim kiem nut co khoa k tren bang bam
 int search(int k)
 {
-	int i;
+	int i,j;
 	i=hashfunc(k);
+	j=hashfunc2(k);
 	while(hashtable[i].key!=k && hashtable[i].key!=NULLKEY)
-	{
-		//bam lai(theo phuong phap do tuyen tinh): hi(key)=h(key)+i % M
-		i=i+1;
-		if(i>=M)
-			i=i-M;
-	}
+		//bam lai(theo phuong phap bam kep
+		i=(i+j)%M;
 	if(hashtable[i].key==k)	//tim thay
 		return(i);
 	else
-		return(M);	//khong tim thay
+		return(M);
+
 }
+
 //tac vu insert : them nut co khoa k vao bang bam
 int insert(int k)
 {
@@ -66,21 +71,18 @@ int insert(int k)
 	if(full())
 	{
 		printf("Bang bam bi day khong the them nut co khoa %d duoc",k);
-		return 0;
+		return(M);
 	}
 	if(search(k)<M)
 	{
 		printf("So nay da co trong bang bam");
-		return 0;
+		return(M);
 	}
 	i=hashfunc(k);
+	j=hashfunc2(k);
 	while(hashtable[i].key!=NULLKEY)
-	{
 		//bam lai theo phuong phap tuyen tinh
-		i++;
-		if(i>=M)
-			i=i-M;
-	}
+		i=(i+j)%M;
 	hashtable[i].key=k;
 	N=N+1;
 	return(i);
@@ -88,27 +90,28 @@ int insert(int k)
 //tac vu remove : xoa nut tai dia chi i tren bang bam
 void remove(int i)
 {
-	int j, r, cont, a;
+	int j, r, h, cont, a;
 	cont= TRUE;
+
 	do
 	{
+		h = hashfunc2(hashtable[i].key);
 		hashtable[i].key=NULLKEY;
 		j=i;
-		do
+	   do
+	   {
+		i=(i+h)%M;
+		if(hashtable[i].key==NULLKEY)
+			cont=FALSE;
+		else
 		{
-			i=i+1;
-			if(i>=M)
-				i=i-M;
-			if(hashtable[i].key==NULLKEY)
-				cont=FALSE;
-			else
-			{
-				r=hashfunc(hashtable[i].key);
-				a=(j<r && r<=i) || (r<=i && i<j) || (i<j && j<r);
-			}
-		}while(cont && a);
-		if(cont)
-			hashtable[j].key=hashtable[i].key;
+			r=hashfunc(hashtable[i].key);
+			a=(j<r && r<=i) || (r<=i && i<j) || (i<j && j<r);
+		}
+	     }while (cont && a);
+	     if(cont)
+		 hashtable[j].key=hashtable[i].key;
+
 	}while(cont);
 
 }
@@ -117,9 +120,8 @@ void viewtable()
 {
 	int i;
 	for(i=0;i<M;i++)
-		printf("\nTable[%2d] : %4d",i,hashtable[i].key);
+		printf("\nTable[%2d] : %4d\t",i,hashtable[i].key);
 }
-
 //chuong trinh chinh
 int main()
 {
@@ -198,7 +200,7 @@ int main()
 			{
 				printf("Tim kiem tren bang bam");
 				printf("Khoa can tim : ");
-				scanf("%d",&key);
+				scanf("%d", &key);
 				if(search(key)==M)
 					printf("\nKhong tim thay");
 				else
@@ -207,13 +209,6 @@ int main()
 					break;
 				}
 			}
-
-		}
+		     }
 	}while(chucnang!=0);
 }
-
-
-
-				
-
-

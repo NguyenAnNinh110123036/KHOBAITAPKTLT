@@ -1,5 +1,4 @@
-Bài 10: M?t s? ?ng d?ng thu?t toán
-?ng d?ng thu?t toán s?p x?p ngoài
+
 #include"stdio.h"
 #include"conio.h"
 #include"string.h"
