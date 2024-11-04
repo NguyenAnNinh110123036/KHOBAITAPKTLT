@@ -158,11 +158,11 @@ int main()
 	int a[100][100], m, k, y, x, n;
 	nhapmang(a, n);
 	xuatmang(a, n);
-	//max_x(a, n, x);
-	//min_y(a, n, y);
-	//tonghang_k(a, n, k);
-	//tongcot_m(a, n, m);
-	//tongchan(a, n);
+	max_x(a, n, x);
+	min_y(a, n, y);
+	tonghang_k(a, n, k);
+	tongcot_m(a, n, m);
+	tongchan(a, n);
 	kiemtraDC(a, n);
 	ALLmang_nho_bang_1(a, n);
 	doixung(a, n);
