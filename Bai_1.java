@@ -8,14 +8,15 @@ public class Bai_1 {
 		int a = sc.nextInt();
 		System.out.println("Moi ban nhap b: ");
 		int b = sc.nextInt();
-		if(a>b && a == b)
+		if(a>b || a == b)
 		{
-			System.out.print(a);
+			System.out.print("So lon hon la " +a);
 		}
 		else
 		{
-			System.out.print(b);
+			System.out.print("So lon hon la " +b);
 		}
+		sc.close();
 	}
 
 }
