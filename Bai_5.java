@@ -18,10 +18,21 @@ public class Bai_5 {
 			{
 				x1 = (float)((-b+Math.sqrt(delta))/(2*a));
 				x2 = (float)((-b-Math.sqrt(delta))/(2*a));
+				System.out.println(x2);
+				System.out.println(x1);
+			}
+			else if(delta == 0)
+			{
+				x1 = (float) ((-b)/(2*a));
+				System.out.println("PT co nghiem kep la: " +x1);
+			}
+			else if ( delta < 0)
+			{
+				System.out.println("PT vo nghiem ");
 			}
 		}
-		System.out.println(x1);
-		System.out.println(x2);
+		
+		
 	}
 
 }
